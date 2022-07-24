@@ -10,7 +10,11 @@ html(lang="en")
     header
       h1 It's work
     main
-      form
+      ul
+      form#nick
+        input(type="text", placeholder="choose a nickname", required)
+        button Save
+      form#message
         input(type="text", placeholder="write a message", required)
         button Send 
     script(src="/public/js/app.js") 

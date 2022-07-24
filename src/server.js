@@ -22,11 +22,20 @@ function onSocketClose() {
 let sockets = [];
 wss.on("connection", (socket) => {
   sockets.push(socket);
+  socket["nickname"] = "Anon";
   console.log("Connected to Browser ✅");
   socket.on("close", onSocketClose);
-  socket.on("message", (message) => {
-    const translatedMessageData = message.toString("utf8");
-    sockets.forEach((aSocket) => aSocket.send(translatedMessageData));
+  socket.on("message", (msg) => {
+    const translatedMessageData = msg.toString("utf8");
+    const message = JSON.parse(translatedMessageData);
+    switch (message.type) {
+      case "new_message":
+        sockets.forEach((aSocket) =>
+          aSocket.send(`${socket.nickname}: ${message.payload}`)
+        );
+      case "nickname":
+        socket["nickname"] = message.payload;
+    }
   });
   socket.send("hello");
 });
