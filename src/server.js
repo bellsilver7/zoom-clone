@@ -19,7 +19,8 @@ wss.on("connection", (socket) => {
   console.log("Connected to Browser ✅");
   socket.on("close", () => console.log("Disconnected from Server ❌"));
   socket.on("message", (message) => {
-    console.log(message);
+    const translatedMessageData = message.toString("utf8");
+    console.log(translatedMessageData);
   });
   socket.send("hello");
 });
