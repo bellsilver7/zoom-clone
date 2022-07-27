@@ -58,3 +58,12 @@ socket.on("bye", (user) => {
   addMessage(`${user} left~`);
 });
 socket.on("new_message", addMessage);
+socket.on("change_room", (rooms) => {
+  const ul = welcome.querySelector("ul");
+  ul.innerHTML = "";
+  rooms.forEach((room) => {
+    const li = document.createElement("li");
+    li.innerText = room;
+    ul.appendChild(li);
+  });
+});
