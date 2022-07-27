@@ -42,9 +42,9 @@ io.on("connection", (socket) => {
   });
   socket.on("enter_room", (roomName, done) => {
     socket.join(roomName);
-    done();
-    socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName));
+    done(countRoom(roomName));
     io.sockets.emit("change_room", publicRooms());
+    socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName));
   });
   socket.on("disconnecting", () => {
     socket.rooms.forEach((room) => {
