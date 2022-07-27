@@ -49,12 +49,19 @@ function handleRoomSubmit(event) {
   input.value = "";
 }
 
+function setRoomCount(count) {
+  const h3 = room.querySelector("h3");
+  h3.innerText = `room ${roomName} (${count})`;
+}
+
 form.addEventListener("submit", handleRoomSubmit);
 
-socket.on("welcome", (user) => {
+socket.on("welcome", (user, newCount) => {
+  setRoomCount(newCount);
   addMessage(`${user} arrived!`);
 });
-socket.on("bye", (user) => {
+socket.on("bye", (user, newCount) => {
+  setRoomCount(newCount);
   addMessage(`${user} left~`);
 });
 socket.on("new_message", addMessage);
