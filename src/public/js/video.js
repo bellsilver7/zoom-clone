@@ -78,13 +78,22 @@ function handleCameraClick() {
   }
 }
 
-function handleCameraChange() {
-  getMedia(camerasSelect.value);
+async function handleCameraChange() {
+  console.log("change camera");
+  await getMedia(camerasSelect.value);
+  if (myPeerConnection) {
+    const videoTrack = myStream.getVideoTracks()[0];
+    const videoSender = myPeerConnection
+      .getSenders()
+      .find((sender) => sender.track.kind === "video");
+    videoSender.replaceTrack(videoTrack);
+    console.log("replace sender video track");
+  }
 }
 
 muteBtn.addEventListener("click", handleMuteClick);
 cameraBtn.addEventListener("click", handleCameraClick);
-camerasSelect.addEventListener("inupt", handleCameraChange);
+camerasSelect.addEventListener("change", handleCameraChange);
 
 // Welcome Form (join a room)
 const welcome = document.getElementById("welcome");
