@@ -151,11 +151,12 @@ function makeConnection() {
     iceServers: [
       {
         urls: [
-          "stun:stun.l.google.com:19302",
-          "stun:stun1.l.google.com:19302",
-          "stun:stun2.l.google.com:19302",
-          "stun:stun3.l.google.com:19302",
-          "stun:stun4.l.google.com:19302",
+          // 테스트를 위한 STUN 서버 / 실제 운영시에는 개별적인 서버가 필요함
+          // "stun:stun.l.google.com:19302",
+          // "stun:stun1.l.google.com:19302",
+          // "stun:stun2.l.google.com:19302",
+          // "stun:stun3.l.google.com:19302",
+          // "stun:stun4.l.google.com:19302",
         ],
       },
     ],
