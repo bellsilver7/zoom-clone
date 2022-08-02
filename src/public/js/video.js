@@ -93,7 +93,7 @@ async function handleCameraChange() {
 
 muteBtn.addEventListener("click", handleMuteClick);
 cameraBtn.addEventListener("click", handleCameraClick);
-camerasSelect.addEventListener("change", handleCameraChange);
+camerasSelect.addEventListener("input", handleCameraChange);
 
 // Welcome Form (join a room)
 const welcome = document.getElementById("welcome");
@@ -147,7 +147,19 @@ socket.on("ice", (ice) => {
 // RTC code
 
 function makeConnection() {
-  myPeerConnection = new RTCPeerConnection();
+  myPeerConnection = new RTCPeerConnection({
+    iceServers: [
+      {
+        urls: [
+          "stun:stun.l.google.com:19302",
+          "stun:stun1.l.google.com:19302",
+          "stun:stun2.l.google.com:19302",
+          "stun:stun3.l.google.com:19302",
+          "stun:stun4.l.google.com:19302",
+        ],
+      },
+    ],
+  });
   myPeerConnection.addEventListener("icecandidate", handleIce);
   myPeerConnection.addEventListener("addstream", handleAddStream);
   myStream
