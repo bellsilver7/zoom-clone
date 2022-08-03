@@ -1,0 +1,45 @@
+doctype html
+html(lang="ko")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Noom
+    script(src="https://cdn.tailwindcss.com")
+  body
+    header
+      h1 Video&Chat Meet
+
+    main
+      #welcome
+        form
+          input.border-2.border-teal-600.p-2(type="text", required, placeholder="Room name")
+          button.border-2.border-teal-600.bg-teal-600.p-2.text-white Enter Room
+
+      #room.grid.grid-cols-12.gap-4
+
+        #video.col-span-8.bg-blue-100
+          #call.grid.grid-cols-2
+
+            #myStream.col-span-1.m-2.bg-white.rounded
+              video#myFace(autoplay, playsinline, width="400", height="400") 
+              #button-groups.p-2
+                select#cameras.p-2.mr-1.rounded.border-2.border-teal-600
+                  option(value="device") Face Camera
+                button.bg-teal-600.text-white.p-2.mr-1.rounded#mute Mute 
+                button.bg-teal-600.text-white.p-2.mr-1.rounded#camera Turn Camera Off
+
+            #peersStream.col-span-1.m-2.bg-white.rounded
+              video#peerFace(autoplay, playsinline, width="400", height="400") 
+
+        #chat.col-span-4.bg-blue-100
+          #messages.p-2
+            .message.bg-white.mb-2.p-2.rounded 메시지가 여기에 나옵니다.
+            .message.bg-white.mb-2.p-2.rounded 메시지가 여기에 나옵니다.
+            .message.bg-white.mb-2.p-2.rounded 메시지가 여기에 나옵니다.
+          form.bg-gray-100.p-2
+            input.p-2.rounded(type="text", required, placeholder="메시지를 입력하세요.")
+            button.rounded.bg-yellow-200.p-2 전송 
+
+    script(src="/socket.io/socket.io.js") 
+    script(src="/public/js/video.js") 
